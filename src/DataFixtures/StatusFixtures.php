@@ -102,6 +102,7 @@ class StatusFixtures extends Fixture
             $status->setCode($oneStatus['Code']);
             $status->setMessage($oneStatus['Message']);
             $status->setSignification($oneStatus['Signification']);
+            $this->addReference($oneStatus['Code'], $status);
             $manager->persist($status);
         }
 
