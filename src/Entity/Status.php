@@ -19,7 +19,7 @@ class Status
     #[ORM\Column(type: 'string', length: 255)]
     private $message;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'text')]
     private $signification;
 
     public function getId(): ?int
