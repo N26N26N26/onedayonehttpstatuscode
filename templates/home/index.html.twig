@@ -6,9 +6,9 @@
     <div class="flex flex-col text-center">
         <h1 class="text-black bg-white m-10">STATUS OF THE DAY</h1>
         <li class="text-custom-green list-none">
-            <ul class="text-2xl m-3">404</ul>
-            <ul class="m-5">Not Found</ul>
-            <ul class="m-5">Ressource non trouvée</ul>
+            <ul class="text-2xl m-3">{{ status.code }}</ul>
+            <ul class="m-5">{{ status.message }}</ul>
+            <ul class="m-5">{{ status.signification }}</ul>
         </li>
     </div>
     <div class="flex flex-col text-center">
