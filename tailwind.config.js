@@ -3,7 +3,11 @@ module.exports = {
     'templates/**/*.html.twig',
     'assets/js/**/*.js'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'custom-green': '#40FF10'
+      },
+    },
   },
   plugins: [],
 }
