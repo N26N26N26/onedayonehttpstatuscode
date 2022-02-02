@@ -35,10 +35,15 @@ class HomeController extends AbstractController
 
         $status = $historyRepository->findOneByDate($today)?->getStatus();
 
-        if ($request->get('answer') != "") {
+        if ($request) {
             if ($request->get('answer') == $status->getCode()) {
                 if ($userRepository->findOneByNickname($request->get('pseudo'))) {
                     $user = $userRepository->findOneByNickname($request->get('pseudo'));
+                    if($user->getLastdateplayed()->format('d/m/Y') == $today->format('d/m/Y')) {
+                        return $this->render('home/index.html.twig', [
+                            'status' => $status
+                        ]);
+                    }
                 } else {
                     $user = new User();
                     $user->setNickname($request->get('pseudo'));
@@ -49,15 +54,21 @@ class HomeController extends AbstractController
             if ($request->get('answer') != $status->getCode()) {
                 if ($userRepository->findOneByNickname($request->get('pseudo'))) {
                     $user = $userRepository->findOneByNickname($request->get('pseudo'));
+                    if($user->getLastdateplayed()->format('d/m/Y') == $today->format('d/m/Y')) {
+                        return $this->render('home/index.html.twig', [
+                            'status' => $status
+                        ]);
+                    }
                 } else {
                     $user = new User();
                 }
                 $user->setInARow(0);
             }
-
             $user->setTotalAnswers($user->getTotalAnswers() + 1);
+            $user->setLastdateplayed($today);
             $entityManager->persist($user);
             $entityManager->flush($user);
+        } else {
 
         }
 

@@ -25,6 +25,9 @@ class User
     #[ORM\Column(type: 'integer')]
     private $inarow;
 
+    #[ORM\Column(type: 'date', nullable: true)]
+    private $lastdateplayed;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,4 +80,17 @@ class User
 
         return $this;
     }
+
+    public function getLastdateplayed(): ?\DateTimeInterface
+    {
+        return $this->lastdateplayed;
+    }
+
+    public function setLastdateplayed(?\DateTimeInterface $lastdateplayed): self
+    {
+        $this->lastdateplayed = $lastdateplayed;
+
+        return $this;
+    }
+
 }
