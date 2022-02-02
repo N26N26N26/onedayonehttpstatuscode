@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -13,10 +13,48 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        <header>
-            <img src="{{ asset('build/images/logo.png') }}">
-        </header>
+    <body class="bg-black">
+    <header id="top">
+        <nav id="site-menu" class="m-2 pb-2 border-b">
+            <div class="flex text-white justify-between">
+                <div class="flex">
+                    <img class="w-px w-16 h-auto " src="{{ asset('build/images/logo.png') }}">
+                    <h3 class="text-sm mt-1 ml-1">ONE DAY...</br>ONE HTTP STATUS CODE</h3>
+                </div>
+                <button id="menuBtn" class="hamburger sm:hidden" type="button" onclick="navToggle();">
+                    <span class="hamburger__top-bun"></span><span class="hamburger__bottom-bun"></span>
+                </button>
+            </div>
+            <div id="menu" class="flex justify-around text-center hidden text-white text-sm mt-2">
+                <a>Concept</a>
+                <a>Ranking</a>
+                <a>History</a>
+            </div>
+        </nav>
+    </header>
         {% block body %}{% endblock %}
+    <script>
+        var nav = document.getElementById('site-menu');
+        var header = document.getElementById('top');
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY >=400) { // adjust this value based on site structure and header image height
+                nav.classList.add('nav-sticky');
+                header.classList.add('pt-scroll');
+            } else {
+                nav.classList.remove('nav-sticky');
+                header.classList.remove('pt-scroll');
+            }
+        });
+
+        function navToggle() {
+            var btn = document.getElementById('menuBtn');
+            var nav = document.getElementById('menu');
+
+            btn.classList.toggle('open');
+            nav.classList.toggle('flex');
+            nav.classList.toggle('hidden');
+        }
+    </script>
     </body>
 </html>
