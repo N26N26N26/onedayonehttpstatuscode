@@ -8,7 +8,7 @@ class Random
 
     public function random()
     {
-        return rand(84, 166);
+        return rand(167, 249);
     }
 
 }
