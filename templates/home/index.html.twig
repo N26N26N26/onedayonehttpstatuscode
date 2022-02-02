@@ -10,14 +10,17 @@
             <ul class="m-5">{{ status.signification }}</ul>
         </li>
     </div>
-    <div class="flex flex-col text-center">
+    <div class="flex justify-center flex-col text-center">
         <h1 class="text-black bg-white m-10">QUESTION OF THE DAY</h1>
         <li class="text-custom-green list-none">
             <ul class="m-5">{{ status.message }}</ul>
         </li>
-        <form method="GET">
-            <input type="number" name="answer">
-            <button type="submit">Soumettre</button>
+        <form method="GET" class="flex flex-col justify-center text-center">
+            <label class="text-white text-xs">Choose your pseudo :</label>
+            <input type="int" name="pseudo">
+            <label class="text-white text-xs">And find the code :</label>
+            <input type="int" name="answer">
+            <button class="bg-white p-2 mt-3 text-xs" type="submit">Soumettre</button>
         </form>
     </div>
     <div class="flex flex-col text-center">
