@@ -1,6 +1,30 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}ONE DAY | ONE HTTP STATUS CODE{% endblock %}
 
 {% block body %}
+    <div class="flex flex-col text-center">
+        <h1 class="text-black bg-white m-10">STATUS OF THE DAY</h1>
+        <li class="text-custom-green list-none">
+            <ul class="text-2xl m-3">404</ul>
+            <ul class="m-5">Not Found</ul>
+            <ul class="m-5">Ressource non trouvée</ul>
+        </li>
+    </div>
+    <div class="flex flex-col text-center">
+        <h1 class="text-black bg-white m-10">QUESTION OF THE DAY</h1>
+        <li class="text-custom-green list-none">
+            <ul class="m-5">Ressource non trouvée</ul>
+        </li>
+    </div>
+    <div class="flex flex-col text-center">
+        <h1 class="text-black bg-white m-10">WINNER OF THE DAY</h1>
+        <li class="text-custom-green list-none m-2 grid grid-cols-3 md:grid-cols-6 gap-5 text-center">
+            <ul class="text-xs">-Jordan</ul>
+            <ul class="text-xs">-N26</ul>
+            <ul class="text-xs">-Théo</ul>
+            <ul class="text-xs">-Marvin</ul>
+            <ul class="text-xs">-Romain</ul>
+            <ul class="text-xs">-Noélie</ul>
+        </li>
+    </div>
 {% endblock %}
