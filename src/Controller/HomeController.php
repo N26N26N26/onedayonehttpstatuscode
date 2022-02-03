@@ -115,7 +115,7 @@ class HomeController extends AbstractController
     #[Route('/concept', name: 'concept')]
     public function showConcept(): Response
     {
-        return $this->render('home/concept.html.twig')
+        return $this->render('home/concept.html.twig');
     }
 
 }
