@@ -128,4 +128,14 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/history', name: 'history')]
+    public function showHistory(HistoryRepository $historyRepository): Response
+    {
+        $history = $historyRepository->findAll();
+
+        return $this->render('home/history.html.twig', [
+            'history' => $history,
+        ]);
+    }
+
 }
