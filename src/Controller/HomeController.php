@@ -35,7 +35,7 @@ class HomeController extends AbstractController
 
         $status = $historyRepository->findOneByDate($today)?->getStatus();
 
-        if ($request) {
+        if ($request->get('answer') != "" && $request->get('pseudo') != "") {
             if ($request->get('answer') == $status->getCode()) {
                 if ($userRepository->findOneByNickname($request->get('pseudo'))) {
                     $user = $userRepository->findOneByNickname($request->get('pseudo'));
@@ -72,8 +72,11 @@ class HomeController extends AbstractController
 
         }
 
+        $winners = $userRepository->findByExampleField($today->format('Y/m/d'));
+
         return $this->render('home/index.html.twig', [
-            'status' => $status
+            'status' => $status,
+            'winners' => $winners,
         ]);
     }
 }
