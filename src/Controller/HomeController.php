@@ -40,8 +40,10 @@ class HomeController extends AbstractController
                 if ($userRepository->findOneByNickname($request->get('pseudo'))) {
                     $user = $userRepository->findOneByNickname($request->get('pseudo'));
                     if($user->getLastdateplayed()->format('d/m/Y') == $today->format('d/m/Y')) {
+                        $winners = $userRepository->findByExampleField($today->format('Y/m/d'));
                         return $this->render('home/index.html.twig', [
-                            'status' => $status
+                            'status' => $status,
+                            'winners' => $winners,
                         ]);
                     }
                 } else {
@@ -55,8 +57,10 @@ class HomeController extends AbstractController
                 if ($userRepository->findOneByNickname($request->get('pseudo'))) {
                     $user = $userRepository->findOneByNickname($request->get('pseudo'));
                     if($user->getLastdateplayed()->format('d/m/Y') == $today->format('d/m/Y')) {
+                        $winners = $userRepository->findByExampleField($today->format('Y/m/d'));
                         return $this->render('home/index.html.twig', [
-                            'status' => $status
+                            'status' => $status,
+                            'winners' => $winners,
                         ]);
                     }
                 } else {
