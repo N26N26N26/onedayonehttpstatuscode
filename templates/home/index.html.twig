@@ -14,7 +14,7 @@
         <div class="flex justify-center flex-col text-center border border-white m-3 pb-3">
             <h1 class="text-black bg-white m-6">QUESTION OF THE DAY</h1>
             <li class="text-custom-green list-none">
-                <ul class="m-3">{{ tomorrowQuestion.message }}</ul>
+                <ul class="m-3">{{ yesterdayStatus.message }}</ul>
             </li>
             <form method="GET" class="flex flex-col justify-center text-center items-center mt-6">
                 <label class="text-white text-xs">Choose your pseudo :</label>
@@ -25,9 +25,15 @@
             </form>
             {% for category, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="bg-red-600 text-white mt-2 text-xs p-6">
-                        {{ message }}
-                    </div>
+                    {% if "Good Answer" in message %}
+                        <div class="bg-custom-green text-white mt-2 text-xs p-6 mx-4">
+                            {{ message }}
+                        </div>
+                    {% else %}
+                        <div class="bg-red-600 text-white mt-2 text-xs p-6 mx-4">
+                            {{ message }}
+                        </div>
+                    {% endif %}
                 {% endfor %}
             {% endfor %}
         </div>
