@@ -24,7 +24,7 @@
         </form>
         {% for category, messages in app.flashes %}
             {% for message in messages %}
-                <div class="{{ category }}">
+                <div class="bg-red-600 text-white mt-2 text-xs p-6">
                     {{ message }}
                 </div>
             {% endfor %}
