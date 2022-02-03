@@ -119,9 +119,13 @@ class HomeController extends AbstractController
     }
 
     #[Route('/ranking', name: 'ranking')]
-    public function showRanking(): Response
+    public function showRanking(UserRepository $userRepository): Response
     {
-        return $this->render('home/ranking.html.twig');
+        $users = $userRepository->findAll();
+
+        return $this->render('home/ranking.html.twig', [
+            'users' => $users,
+        ]);
     }
 
 }
