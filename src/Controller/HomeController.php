@@ -37,6 +37,8 @@ class HomeController extends AbstractController
 
         $status = $historyRepository->findOneByDate($today)?->getStatus();
 
+        $tomorrowQuestion = $historyRepository->findOneByDate($tomorrow)?->getStatus();
+
         // NEED TO FACTORIZE
 
         if ($request->get('answer') != "" && $request->get('pseudo') != "") {
@@ -48,6 +50,7 @@ class HomeController extends AbstractController
                         return $this->render('home/index.html.twig', [
                             'status' => $status,
                             'winners' => $winners,
+                            'tomorrowQuestion' => $tomorrowQuestion,
                         ]);
                     }
                 } else {
@@ -66,6 +69,7 @@ class HomeController extends AbstractController
                         return $this->render('home/index.html.twig', [
                             'status' => $status,
                             'winners' => $winners,
+                            'tomorrowQuestion' => $tomorrowQuestion,
                         ]);
                     }
 
@@ -85,6 +89,7 @@ class HomeController extends AbstractController
                 return $this->render('home/index.html.twig', [
                     'status' => $status,
                     'winners' => $winners,
+                    'tomorrowQuestion' => $tomorrowQuestion,
                 ]);
             }
             $user->setTotalAnswers($user->getTotalAnswers() + 1);
@@ -95,6 +100,7 @@ class HomeController extends AbstractController
             return $this->render('home/index.html.twig', [
                 'status' => $status,
                 'winners' => $winners,
+                'tomorrowQuestion' => $tomorrowQuestion,
             ]);
         }
 
@@ -102,6 +108,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'status' => $status,
             'winners' => $winners,
+            'tomorrowQuestion' => $tomorrowQuestion,
         ]);
     }
 }
