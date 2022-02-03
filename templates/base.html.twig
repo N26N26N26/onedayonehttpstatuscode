@@ -13,9 +13,9 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body class="bg-black">
-    <header id="top">
-        <nav id="site-menu" class="m-2 pb-2 border-b md:flex sm:justify-between">
+    <body>
+    <header id="top" class="bg-black">
+        <nav id="site-menu" class="p-2 border-b md:flex sm:justify-between">
             <div class="flex text-white justify-between items-center">
                 <div class="flex">
                     <img class="w-px w-16 h-auto " src="{{ asset('build/images/logo.png') }}">
@@ -26,8 +26,8 @@
                 </button>
             </div>
             <div id="menu" class="flex md:flex justify-around text-center hidden text-sm mt-6">
-                <a class="md:mr-3 text-white hover:text-custom-green hover:underline" href="{{ path("concept") }}">Concept</a>
-                <a class="md:mr-3 text-white hover:text-custom-green hover:underline" href="{{ path("ranking") }}">Ranking</a>
+                <a class="md:mr-3 text-white hover:text-custom-green hover:underline pr-2 border-r-2 border-r-white" href="{{ path("concept") }}">Concept</a>
+                <a class="md:mr-3 text-white hover:text-custom-green hover:underline pr-2 border-r-2 border-r-white" href="{{ path("ranking") }}">Ranking</a>
                 <a class="md:mr-3 text-white hover:text-custom-green hover:underline" href="{{ path("history") }}">History</a>
             </div>
         </nav>
