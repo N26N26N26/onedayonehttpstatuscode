@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\Random;
 use DateTime;
+use DateInterval;
 
 class HomeController extends AbstractController
 {
@@ -30,6 +31,7 @@ class HomeController extends AbstractController
             $newHistory = new History();
             $newHistory->setDate($tomorrow);
             $newHistory->setStatus($statusRepository->findOneById($random->random()));
+            $newHistory->setTotalgoodanswer(0)->setTotalanswer(0);
             $entityManager->persist($newHistory);
             $entityManager->flush();
         }

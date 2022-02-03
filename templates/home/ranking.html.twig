@@ -12,7 +12,7 @@
                         <table class="min-w-full text-sm text-gray-200">
                             <thead class="text-xs uppercase font-medium border border-green-500">
                             <tr>
-                                <th></th>
+                                <th>#</th>
                                 <th scope="col" class="px-6 py-3 text-left tracking-wider">
                                     Pseudo
                                 </th>
@@ -32,7 +32,13 @@
                             </thead>
                             <tbody class="border border-green-500">
                             {% for user in users|sort((a, b) => b.goodanswers <=> a.goodanswers)|slice(0, 10) %}
-                            <tr class="bg-black bg-opacity-20">
+                                {% if loop.index == 1 %}
+                                <tr class="bg-green-400">
+                                {% elseif loop.index == 10 %}
+                                <tr class="bg-red-400">
+                                {% else %}
+                                <tr class="bg-black-400">
+                                {% endif %}
                                 <td class="pl-4">
                                     {{ loop.index }}
                                 </td>
@@ -46,7 +52,7 @@
                                     {{ user.goodanswers }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap hidden md:table-cell">
-                                    {{ user.goodanswers / user.totalanswers * 100 }}%
+                                    {{ (user.goodanswers / user.totalanswers * 100)|round(1, 'floor') }}%
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap hidden md:table-cell">
                                     {{ user.inarow }}
