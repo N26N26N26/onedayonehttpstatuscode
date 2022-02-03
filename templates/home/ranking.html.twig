@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+{% block title %}RANKING{% endblock %}
+
+{% block body %}
+    <div class="flex flex-col items-center justify-center w-screen mt-10">
+        <!-- Component Start -->
+        <h1 class="text-lg text-white font-medium underline">Ranking</h1>
+        <div class="flex flex-col mt-6">
+            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                    <div class="shadow overflow-hidden sm:rounded-lg">
+                        <table class="min-w-full text-sm text-gray-200">
+                            <thead class="text-xs uppercase font-medium border border-green-500">
+                            <tr>
+                                <th></th>
+                                <th scope="col" class="px-6 py-3 text-left tracking-wider">
+                                    Pseudo
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left tracking-wider">
+                                    QA
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left tracking-wider">
+                                    G
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left tracking-wider hidden md:table-cell">
+                                    %R
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left tracking-wider hidden md:table-cell">
+                                    Streak
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="border border-green-500">
+                            {% for user in users|sort((a, b) => b.goodanswers <=> a.goodanswers)|slice(0, 10) %}
+                            <tr class="bg-black bg-opacity-20">
+                                <td class="pl-4">
+                                    {{ loop.index }}
+                                </td>
+                                <td class="flex px-6 py-4 whitespace-nowrap">
+                                    <span class="font-medium">{{ user.nickname }}</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{ user.totalanswers }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{ user.goodanswers }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap hidden md:table-cell">
+                                    {{ user.goodanswers / user.totalanswers * 100 }}%
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap hidden md:table-cell">
+                                    {{ user.inarow }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Component End  -->
+    </div>
+{% endblock %}
