@@ -10,12 +10,12 @@
             <ul class="m-5">{{ status.signification }}</ul>
         </li>
     </div>
-    <div class="flex justify-center flex-col text-center items-center">
-        <h1 class="text-black bg-white mt-10 mb-5 px-2">QUESTION OF THE DAY</h1>
+    <div class="flex justify-center flex-col text-center">
+        <h1 class="text-black bg-white m-10">QUESTION OF THE DAY</h1>
         <li class="text-custom-green list-none">
-            <ul class="m-6">{{ status.message }}</ul>
+            <ul class="m-3">{{ tomorrowQuestion.message }}</ul>
         </li>
-        <form method="GET" class="flex flex-col justify-center text-center items-center">
+        <form method="GET" class="flex flex-col justify-center text-center items-center mt-6">
             <label class="text-white text-xs">Choose your pseudo :</label>
             <input class="bg-gray-300 focus:bg-gray-400 m-3 text-center" type="text" name="pseudo" maxlength="15" required>
             <label class="text-white text-xs">And find the code :</label>
