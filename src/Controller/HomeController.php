@@ -33,15 +33,21 @@ class HomeController extends AbstractController
             $entityManager->flush();
         }
 
+        $winners = $userRepository->findByExampleField($today->format('Y/m/d'));
+
         $status = $historyRepository->findOneByDate($today)?->getStatus();
+
+        // NEED TO FACTORIZE
 
         if ($request->get('answer') != "" && $request->get('pseudo') != "") {
             if ($request->get('answer') == $status->getCode()) {
                 if ($userRepository->findOneByNickname($request->get('pseudo'))) {
                     $user = $userRepository->findOneByNickname($request->get('pseudo'));
                     if($user->getLastdateplayed()->format('d/m/Y') == $today->format('d/m/Y')) {
+                        $this->addFlash('error', 'You already played today ! Try again tomorrow !');
                         return $this->render('home/index.html.twig', [
-                            'status' => $status
+                            'status' => $status,
+                            'winners' => $winners,
                         ]);
                     }
                 } else {
@@ -54,26 +60,45 @@ class HomeController extends AbstractController
             if ($request->get('answer') != $status->getCode()) {
                 if ($userRepository->findOneByNickname($request->get('pseudo'))) {
                     $user = $userRepository->findOneByNickname($request->get('pseudo'));
-                    if($user->getLastdateplayed()->format('d/m/Y') == $today->format('d/m/Y')) {
+                    if($user->getLastdateplayed()->format('Y/m/d') == $today->format('Y/m/d')) {
+                        $this->addFlash('error', 'You already played today ! Try again tomorrow !');
+
                         return $this->render('home/index.html.twig', [
-                            'status' => $status
+                            'status' => $status,
+                            'winners' => $winners,
                         ]);
                     }
+
                 } else {
                     $user = new User();
+                    $user->setNickname($request->get('pseudo'));
+                    $user->setGoodAnswers(0);
                 }
+                $user->setTotalAnswers($user->getTotalAnswers() + 1);
+                $user->setLastdateplayed($today);
                 $user->setInARow(0);
+
+                $entityManager->persist($user);
+                $entityManager->flush($user);
+
+                $this->addFlash('error', 'Wrong Answer ! Try again tomorrow !');
+                return $this->render('home/index.html.twig', [
+                    'status' => $status,
+                    'winners' => $winners,
+                ]);
             }
             $user->setTotalAnswers($user->getTotalAnswers() + 1);
             $user->setLastdateplayed($today);
             $entityManager->persist($user);
             $entityManager->flush($user);
         } else {
-
+            return $this->render('home/index.html.twig', [
+                'status' => $status,
+                'winners' => $winners,
+            ]);
         }
 
-        $winners = $userRepository->findByExampleField($today->format('Y/m/d'));
-
+        $this->addFlash('sucess', 'Good Answer ! Keep in row tomorrow !');
         return $this->render('home/index.html.twig', [
             'status' => $status,
             'winners' => $winners,
