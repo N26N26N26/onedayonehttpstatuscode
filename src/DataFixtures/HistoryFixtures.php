@@ -14,6 +14,13 @@ class HistoryFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
+        $yesterdayhistory = new History();
+        $yesterdayhistory->setDate(new DateTime("yesterday"));
+        $yesterdayhistory->setTotalanswer(45);
+        $yesterdayhistory->setTotalgoodanswer(34);
+        $yesterdayhistory->setStatus($this->getReference(200));
+        $manager->persist($yesterdayhistory);
+
         $history = new History();
         $history->setDate(new DateTime("now"));
         $history->setTotalanswer(10);

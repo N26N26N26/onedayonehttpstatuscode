@@ -22,6 +22,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(StatusRepository $statusRepository, HistoryRepository $historyRepository, UserRepository $userRepository, Random $random, EntityManagerInterface $entityManager, Request $request): Response
     {
+        $yesterday = new DateTime("yesterday");
         $today = new DateTime("now");
         $tomorrow = new DateTime("tomorrow");
 
@@ -36,13 +37,12 @@ class HomeController extends AbstractController
         $winners = $userRepository->findByExampleField($today->format('Y/m/d'));
 
         $status = $historyRepository->findOneByDate($today)?->getStatus();
-
-        $tomorrowQuestion = $historyRepository->findOneByDate($tomorrow)?->getStatus();
+        $yesterdayStatus = $historyRepository->findOneByDate($yesterday)?->getStatus();
 
         // NEED TO FACTORIZE
 
         if ($request->get('answer') != "" && $request->get('pseudo') != "") {
-            if ($request->get('answer') == $status->getCode()) {
+            if ($request->get('answer') == $yesterdayStatus->getCode()) {
                 if ($userRepository->findOneByNickname($request->get('pseudo'))) {
                     $user = $userRepository->findOneByNickname($request->get('pseudo'));
                     if($user->getLastdateplayed()->format('d/m/Y') == $today->format('d/m/Y')) {
@@ -50,7 +50,7 @@ class HomeController extends AbstractController
                         return $this->render('home/index.html.twig', [
                             'status' => $status,
                             'winners' => $winners,
-                            'tomorrowQuestion' => $tomorrowQuestion,
+                            'yesterdayStatus' => $yesterdayStatus,
                         ]);
                     }
                 } else {
@@ -60,7 +60,7 @@ class HomeController extends AbstractController
                 $user->setGoodAnswers($user->getGoodAnswers() + 1);
                 $user->setInARow($user->getInARow() + 1);
             }
-            if ($request->get('answer') != $status->getCode()) {
+            if ($request->get('answer') != $yesterdayStatus->getCode()) {
                 if ($userRepository->findOneByNickname($request->get('pseudo'))) {
                     $user = $userRepository->findOneByNickname($request->get('pseudo'));
                     if($user->getLastdateplayed()->format('Y/m/d') == $today->format('Y/m/d')) {
@@ -69,7 +69,7 @@ class HomeController extends AbstractController
                         return $this->render('home/index.html.twig', [
                             'status' => $status,
                             'winners' => $winners,
-                            'tomorrowQuestion' => $tomorrowQuestion,
+                            'yesterdayStatus' => $yesterdayStatus,
                         ]);
                     }
 
@@ -89,7 +89,7 @@ class HomeController extends AbstractController
                 return $this->render('home/index.html.twig', [
                     'status' => $status,
                     'winners' => $winners,
-                    'tomorrowQuestion' => $tomorrowQuestion,
+                    'yesterdayStatus' => $yesterdayStatus,
                 ]);
             }
             $user->setTotalAnswers($user->getTotalAnswers() + 1);
@@ -100,7 +100,7 @@ class HomeController extends AbstractController
             return $this->render('home/index.html.twig', [
                 'status' => $status,
                 'winners' => $winners,
-                'tomorrowQuestion' => $tomorrowQuestion,
+                'yesterdayStatus' => $yesterdayStatus,
             ]);
         }
 
@@ -108,7 +108,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'status' => $status,
             'winners' => $winners,
-            'tomorrowQuestion' => $tomorrowQuestion,
+            'yesterdayStatus' => $yesterdayStatus,
         ]);
     }
 
