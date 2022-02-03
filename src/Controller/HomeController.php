@@ -111,4 +111,11 @@ class HomeController extends AbstractController
             'tomorrowQuestion' => $tomorrowQuestion,
         ]);
     }
+
+    #[Route('/concept', name: 'concept')]
+    public function showConcept(): Response
+    {
+        return $this->render('home/concept.html.twig')
+    }
+
 }
