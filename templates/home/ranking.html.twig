@@ -31,7 +31,7 @@
                             </tr>
                             </thead>
                             <tbody class="border border-green-500">
-                            {% for user in users|sort((a, b) => b.goodanswers <=> a.goodanswers) %}
+                            {% for user in users|sort((a, b) => b.goodanswers <=> a.goodanswers)|slice(0, 10) %}
                             <tr class="bg-black bg-opacity-20">
                                 <td class="pl-4">
                                     {{ loop.index }}
