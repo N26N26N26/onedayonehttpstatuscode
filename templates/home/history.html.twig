@@ -4,7 +4,7 @@
 {% block body %}
     <div class="flex flex-col items-center justify-center w-screen mt-10">
         <!-- Component Start -->
-        <h1 class="text-lg text-white font-medium underline">"Status of the Day" history</h1>
+        <h1 class="text-lg text-white font-medium underline">History</h1>
         <div class="flex flex-col mt-6">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -21,13 +21,13 @@
                             </tr>
                             </thead>
                             <tbody class="border border-green-500">
-                            {% for status in history|sort((a, b) => b.date <=> a.date)|slice(0, 10) %}
+                            {% for status in history|sort((a, b) => b.date <=> a.date)|slice(2, 12) %}
                             <tr class="bg-black bg-opacity-20">
                                 <td class="flex px-6 py-4 whitespace-nowrap">
-                                    <span class="font-medium">{{ history.status.code }}</span>
+                                    <span class="font-medium">{{ status.date|date('Y/m/d') }}</span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ history.date }}
+                                    {{ status.status.code }}
                                 </td>
                             </tr>
                             {% endfor %}
