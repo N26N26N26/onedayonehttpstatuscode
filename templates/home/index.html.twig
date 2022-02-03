@@ -7,7 +7,7 @@
         <li class="text-custom-green list-none">
             <ul class="text-2xl m-3">{{ status.code }}</ul>
             <ul class="m-5">{{ status.message }}</ul>
-            <ul class="m-5">{{ status.signification }}</ul>
+            <ul class="m-5 text-xs">{{ status.signification }}</ul>
         </li>
     </div>
     <div class="flex justify-center flex-col text-center">
@@ -18,7 +18,7 @@
         <form method="GET" class="flex flex-col justify-center text-center items-center mt-6">
             <label class="text-white text-xs">Choose your pseudo :</label>
             <input class="bg-gray-300 focus:bg-gray-400 m-3 text-center" type="text" name="pseudo" maxlength="15" required>
-            <label class="text-white text-xs">And find the code :</label>
+            <label class="text-white text-xs">And find the code associated :</label>
             <input class="bg-gray-300 focus:bg-gray-400 m-3 text-center" type="number" name="answer" max="999" required>
             <button class="bg-gray-300 hover:bg-gray-400 p-2 mt-3 text-xs" type="submit">Submit</button>
         </form>

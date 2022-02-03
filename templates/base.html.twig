@@ -13,12 +13,12 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-    <header id="top" class="bg-black">
+    <body class="bg-black">
+    <header id="top">
         <nav id="site-menu" class="p-2 border-b md:flex sm:justify-between">
             <div class="flex text-white justify-between items-center">
                 <div class="flex">
-                    <img class="w-px w-16 h-auto " src="{{ asset('build/images/logo.png') }}">
+                    <a href="{{ path("home") }}"><img class="w-px w-16 h-auto " src="{{ asset('build/images/logo.png') }}"></a>
                     <h3 class="text-sm mt-1 ml-1">ONE DAY...</br>ONE HTTP STATUS CODE</h3>
                 </div>
                 <button id="menuBtn" class="hamburger md:hidden mr-3" type="button" onclick="navToggle();">
