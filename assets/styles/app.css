@@ -16,6 +16,9 @@ body {
     font-family: var(--mainfont);
 }
 
+:focus {outline:0 !important;}
+
+
 .loading:after {
     overflow: hidden;
     display: inline-block;

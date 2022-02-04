@@ -18,9 +18,9 @@
             </li>
             <form method="GET" class="flex flex-col justify-center text-center items-center mt-6">
                 <label class="text-white text-xs">Choose your pseudo :</label>
-                <input class="bg-gray-300 focus:bg-gray-400 m-3 text-center" type="text" name="pseudo" maxlength="15" required>
+                <input class="bg-gray-300 focus:bg-gray-400 m-3 text-center focus:border focus:border-custom-green" type="text" name="pseudo" maxlength="15" required>
                 <label class="text-white text-xs">Find the code associated :</label>
-                <input class="bg-gray-300 focus:bg-gray-400 m-3 text-center" type="number" name="answer" max="999" required>
+                <input class="bg-gray-300 focus:bg-gray-400 m-3 text-center focus:border focus:border-custom-green" type="number" name="answer" max="999" required>
                 <button class="bg-gray-300 hover:bg-gray-400 p-2 mt-3 text-xs" type="submit">Submit</button>
             </form>
             {% for category, messages in app.flashes %}
